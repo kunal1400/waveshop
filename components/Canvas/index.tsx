@@ -1,11 +1,16 @@
-import React, {useId, useRef } from "react";
+import React, {useContext, useId, useRef } from "react";
 import Sketch from "react-p5";
 import p5 from "p5";
 import { CanvasPropsInterface } from "../../interfaces";
+import { CanvasContext } from "@/context/canvasContext";
 
 function AudioCanvas({imgSrc, alt, width, height}: CanvasPropsInterface) {
-    const canvasRef = useRef<HTMLDivElement | null>(null);
-    const dynamicId = 'canvas' + useId();
+    const {state, dispatch} = useContext(CanvasContext);
+    const {text} = state;
+    console.log(text, "state in canvas element");
+
+    // const canvasRef = useRef<HTMLDivElement | null>(null);
+    // const dynamicId = 'canvas' + useId();
 
     const setup = (p: p5, dynamicId: Element) => {
         p.createCanvas(width, height).parent(dynamicId);

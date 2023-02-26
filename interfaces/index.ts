@@ -1,3 +1,13 @@
+import { ReactNode } from "react"
+
+export interface LayoutPropsType {
+    children?: ReactNode
+}
+
+export interface TextInputPropsInterface {
+    text: string
+}
+
 export interface ProductPropsInterface {
     id: number,
     name: string,
@@ -5,10 +15,12 @@ export interface ProductPropsInterface {
     price: string,
     imageSrc: string,
     imageAlt: string,
+    message?: string
 }
 
 export interface ProductsPropsInterface {
-    products: ProductPropsInterface[]
+    products: ProductPropsInterface[],
+    message?: string
 }
 
 export interface CanvasPropsInterface {

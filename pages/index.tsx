@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
 import ProductGrid from '@/components/Products';
+import { PageHeading } from '@/components/Typography';
+import Textarea from '../components/CanvasInputs/textarea';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -48,6 +50,26 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <PageHeading text='Work with us'/>
+
+      <form action="#" method="POST">
+        <div className="shadow sm:overflow-hidden sm:rounded-md">
+          <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
+            <div>
+              <label htmlFor="about" className="block text-sm font-medium text-gray-700">
+                About
+              </label>
+              <div className="mt-1">
+                <Textarea />
+              </div>
+              <p className="mt-2 text-sm text-gray-500">
+                Brief description for your profile. URLs are hyperlinked.
+              </p>
+            </div>
+          </div>
+        </div>
+      </form>
+
       <ProductGrid products={sampleproducts} />
     </>
   )

@@ -4,12 +4,12 @@ export enum AllowedActions {
     UPDATE_TEXT='UPDATE_TEXT'
 }
 
-export interface ActionInterface {
+export interface CanvasActionInterface {
     type: AllowedActions.UPDATE_TEXT,
     payload: InitialStateInterface
 }
 
-export function setCanvasData(initialState: InitialStateInterface, action: ActionInterface) {
+export function setCanvasData(initialState: InitialStateInterface, action: CanvasActionInterface) {
     const {type, payload} = action;
     switch ( type ) {
         case AllowedActions.UPDATE_TEXT:

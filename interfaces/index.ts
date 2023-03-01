@@ -1,4 +1,5 @@
-import { ReactNode } from "react"
+import { ReactNode } from "react";
+import p5 from "p5";
 
 export interface LayoutPropsType {
     children?: ReactNode
@@ -28,4 +29,11 @@ export interface CanvasPropsInterface {
     alt: string,
     width: number, 
     height: number
+}
+
+export interface CanvasTextGraphicsInterface {
+    p: p5,
+    w: number,
+    h: number,
+    t: string
 }

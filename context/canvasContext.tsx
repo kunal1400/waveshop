@@ -1,6 +1,6 @@
 import { createContext } from "react";
-import { canvasData, InitialStateInterface } from "@/reducer/canvasData";
-import { CanvasActionInterface } from "@/reducer/canvasReducer";
+import { canvasData, InitialStateInterface } from "../reducer/canvasData";
+import { CanvasActionInterface } from "../reducer/canvasReducer";
 
 export const CanvasContext = createContext<{
     state: InitialStateInterface, 

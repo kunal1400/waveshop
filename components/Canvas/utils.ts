@@ -1,5 +1,5 @@
 import { CanvasTextGraphicsInterface } from "../../interfaces";
-
+import p5 from "p5";
 let inputFontSize = 30; 
 
 /**
@@ -24,7 +24,8 @@ export const getTextGraphicWorking = ({p, w, h, t}: CanvasTextGraphicsInterface)
  * because graphics overlaping in loop
  */
 export const getTextGraphic = ({p, w, h, t}: CanvasTextGraphicsInterface) => {
-    let textGraphics = p.createGraphics(w, h);
+    let textGraphics: p5.Graphics;
+    textGraphics = p.createGraphics(w, h);
   
     // It is necessary to set textSize & textLeading equal for proper calculations.
     textGraphics.textSize(inputFontSize);

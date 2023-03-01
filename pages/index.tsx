@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'] });
 const sampleproducts = [
   {
     id: 1,
-    name: 'Earthen Bottle',
+    name: 'Neon Effect',
     href: '#',
     price: '$48',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg',

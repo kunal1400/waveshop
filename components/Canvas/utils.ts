@@ -27,6 +27,8 @@ export const getTextGraphic = ({p, w, h, t}: CanvasTextGraphicsInterface) => {
     let textGraphics: p5.Graphics;
     textGraphics = p.createGraphics(w, h);
   
+    //first push
+    textGraphics.push();
     // It is necessary to set textSize & textLeading equal for proper calculations.
     textGraphics.textSize(inputFontSize);
     textGraphics.textLeading(inputFontSize);
@@ -58,5 +60,12 @@ export const getTextGraphic = ({p, w, h, t}: CanvasTextGraphicsInterface) => {
     textGraphics.textLeading(inputFontSize);
     textGraphics.textAlign("center");
     textGraphics.text(t, 0, 0, textGraphicsWidth, textGraphicsHeight);
+    
+    textGraphics.remove();
+    textGraphics.pop();
+
+    p.imageMode("center");
+    p.image(textGraphics, p.width/2, p.height/2);
+
     return textGraphics;
 }

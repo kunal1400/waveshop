@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import p5 from "p5";
+import p5Types from "p5";
 
 export interface LayoutPropsType {
     children?: ReactNode
@@ -32,7 +32,7 @@ export interface CanvasPropsInterface {
 }
 
 export interface CanvasTextGraphicsInterface {
-    p: p5,
+    p: p5Types,
     w: number,
     h: number,
     t: string

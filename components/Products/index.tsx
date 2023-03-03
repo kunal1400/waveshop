@@ -2,11 +2,11 @@ import dynamic from "next/dynamic";
 import React, { memo } from "react";
 import { ProductsPropsInterface, ProductPropsInterface } from "../../interfaces";
 
-const AudioCanvas = dynamic(() => import("../Canvas"), {
+const NeonCanvas = dynamic(() => import("../Canvas/NeonEffect/Component"), {
     ssr: false
 })
 
-const NeonCanvas = dynamic(() => import("../Canvas/NeonEffect/Component"), {
+const BorderShadow = dynamic(() => import("../Canvas/BorderShadow/Component"), {
     ssr: false
 })
 
@@ -22,9 +22,6 @@ const ProductGrid = memo(function ProductGrid( { products, message }: ProductsPr
             {
                 products.map((product: ProductPropsInterface) => <ProductCard key={product.id} {...product} message={message} />)
             }
-            {
-                <NeonCanvas/>
-            }
         </div>
     </div>
 })
@@ -38,12 +35,8 @@ const ProductGrid = memo(function ProductGrid( { products, message }: ProductsPr
 export function ProductCard({message, ...product}: ProductPropsInterface) {
     return <>
         <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden xl:aspect-w-7 xl:aspect-h-8">            
-            <AudioCanvas 
-                imgSrc={product.imageSrc}
-                alt={product.imageAlt}
-                width={200}
-                height={200}
-            />
+            { product.slug === 'text_neon_effect' ? <NeonCanvas/> : '' }
+            { product.slug === 'border_shadow_effect' ? <BorderShadow/> : '' }
             <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
             <p className="mt-1 text-lg font-medium text-gray-900">{product.price}</p>
         </div>

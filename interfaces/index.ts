@@ -16,7 +16,8 @@ export interface ProductPropsInterface {
     price: string,
     imageSrc: string,
     imageAlt: string,
-    message?: string
+    message?: string,
+    slug: 'text_neon_effect' | 'border_shadow_effect'
 }
 
 export interface ProductsPropsInterface {

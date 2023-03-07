@@ -1,13 +1,14 @@
-import {Container, DesignNavigation} from "../components/Layout";
+import {Container, DesignNavigation, DesignSidebar} from "../components/Layout";
 
 export default function Index() {
     return <>
         <DesignNavigation/>
+        <div className="grid grid-cols-2">
+            <DesignSidebar/>
+            <div>Canvas</div>
+        </div>
         <Container>
-            <div className="grid grid-cols-2">
-                <div>Sidebar</div>
-                <div>Canvas</div>
-            </div>
+            
         </Container>
     </>
 }

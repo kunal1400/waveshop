@@ -16,3 +16,5 @@ export default Layout;
 // Exporting other default components from index
 export {default as Container} from "./container";
 export {default as DesignNavigation} from "./designNavigation";
+export {default as DesignSidebar} from "./designSidebar";
+export {default as SvgIcon} from "./svg";

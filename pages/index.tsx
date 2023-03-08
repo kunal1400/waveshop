@@ -1,17 +1,13 @@
-import dynamic from "next/dynamic";
 import {DesignNavigation, DesignSidebar} from "../components/Layout";
-
-// Dynamically loading canvas because its api depend on window object
-const NeonEffect = dynamic(() => import("../components/Canvas/NeonEffect/Component"), {
-    ssr: false
-})
+import AudioCanvas from "../components/Canvas/AudioCanvas/Component";
 
 export default function Index() {
     return <>
         <DesignNavigation/>
-        <div className="flex">
-            <DesignSidebar/>
-            <NeonEffect/>
+        <div className="flex flex-row">
+            <DesignSidebar className="basis-1/4"/>
+            <AudioCanvas className="basis-3/4" />
         </div>
+        <div>FOOTER here we will use zoom x </div>
     </>
 }

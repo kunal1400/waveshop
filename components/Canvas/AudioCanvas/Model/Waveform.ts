@@ -2,15 +2,26 @@ import p5Types from "p5";
 import { InitialStateInterface } from "../../../../reducer/canvasData";
 
 class Waveform {
-    constructor(private sketch: p5Types, private levels, private canvasData: InitialStateInterface) {
-        console.log(this.levels, "levels")
+    constructor(
+        private sketch: p5Types, 
+        private levels: number[],         
+        private canvasBackgroundImage: p5Types.Image,
+        private canvasWaveBackgroundImage: p5Types.Image,
+        private canvasData: InitialStateInterface,
+    ) { }
+
+    setLevels(l: number[]) {
+        this.levels = l;
     }
 
     drawWaveform() {
         let {
             horizontalSpace,
             verticalSpace,
-            waveType
+            waveType,
+            canvas_background_type,
+            canvas_background_color,
+            canvas_background_image
         } = this.canvasData;
 
         this.sketch.push();
@@ -18,7 +29,29 @@ class Waveform {
         // Setting Image mode to center
         this.sketch.imageMode(this.sketch.CENTER);
 
-        //width and height for waveform
+        // Background color
+        if (canvas_background_type === 'solid') {
+            this.sketch.background(canvas_background_color);
+        }
+
+        //background image
+        if ( canvas_background_type === 'image' && this.canvasBackgroundImage !== null ) {
+            this.canvasBackgroundImage.resize(
+                this.sketch.width, 
+                this.sketch.height
+            );
+            
+            this.sketch.image(
+                this.canvasBackgroundImage, 
+                this.sketch.width / 2, 
+                this.sketch.height / 2
+            );
+        }
+
+        //no stroke on sketch
+        this.sketch.noStroke();
+
+        // width and height for waveform
         let width = this.sketch.width * (1 - horizontalSpace * 2);
         let height = this.sketch.height * (1 - verticalSpace * 2);
 
@@ -33,7 +66,7 @@ class Waveform {
         //create a background for mask
         backgroundForMask = this.createBackgroundForMask(width, height);
 
-        //mask image and display it on canvas
+        // //mask image and display it on canvas
         backgroundForMask.mask(mask);
         this.sketch.image(backgroundForMask, this.sketch.width / 2, this.sketch.height / 2, width, height);
 
@@ -45,8 +78,7 @@ class Waveform {
 
     //create linear waveform
     createLinearWaveformMask(graphicsWidth: number, graphicsHeight: number) {
-        let sketch = this.sketch;
-        let shape = sketch.createGraphics(graphicsWidth, graphicsHeight);
+        let shape = this.sketch.createGraphics(graphicsWidth, graphicsHeight);
         let levels = this.levels;
         let {
             thickness, 
@@ -66,9 +98,9 @@ class Waveform {
 
         for (let x = 0; x < graphicsWidth; x += cspacing) {
             let i = Math.ceil(levels.length * (x / graphicsWidth));
-            let h = (shape.constrain(levels[i] * 1, 0, 1) * height) / 2;
+            let h = (shape.constrain(levels[i] * 1, 0, 1) * graphicsHeight) / 2;
             var _h = h * height
-            shape.rect(x, (height / 2) - _h, thickness, 2 * _h, thickness / 2 * sharpness);
+            shape.rect(x, (graphicsHeight / 2) - _h, thickness, 2 * _h, thickness / 2 * sharpness);
         }
 
         //waveform pop

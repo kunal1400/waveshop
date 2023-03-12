@@ -1,6 +1,6 @@
 import p5Types from "p5";
 
-export default class WaveFormSound {
+export default class Sound {
 
     private songPlayButton: any;
     private pause = false;
@@ -55,7 +55,7 @@ export default class WaveFormSound {
         return this.roundToTwoDigit(this.sound.duration());
     }
 
-    roundToTwoDigit(num) {
+    roundToTwoDigit(num: number) {
         return Math.round((num + Number.EPSILON) * 100) / 100;
     }
 

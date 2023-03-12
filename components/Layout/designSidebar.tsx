@@ -1,6 +1,7 @@
-import { ReactNode, useState } from "react"
-import { LayoutPropsType } from "../../interfaces"
-import SvgIcon, { svgIconType } from "./svg"
+import { ReactNode, useState } from "react";
+import SvgIcon from "./svg";
+import { svgIconType } from "../../interfaces";
+import DesignSidebarSwitching from "./designSidebarSwitching";
 
 export interface ISidebarLinks {
     children?: ReactNode,
@@ -20,8 +21,7 @@ export function SidebarLinks({onSideBarLinkClick, label, svgIcon}: ISidebarLinks
 }
 
 export default function DesignSidebar({className}: {className: string}) {
-    const [selectedOption, setSelectedOption] = useState<string | null>('svg_audio');
-
+    const [selectedOption, setSelectedOption] = useState<svgIconType>('svg_audio');
     return <aside id="logo-sidebar" className={`${className} h-screen bg-white`} aria-label="Sidebar">
         <div className={`flex`}>
             <div className="basis-1/3 h-screen  overflow-y-auto bg-white dark:bg-gray-800">
@@ -86,7 +86,7 @@ export default function DesignSidebar({className}: {className: string}) {
             </div>
             <div className="basis-2/3 h-screen bg-gray-100 border-r border-gray-200">
                 <div className="p-3 overflow-y-auto">
-                    {selectedOption}
+                    <DesignSidebarSwitching iconName={selectedOption} />
                 </div>
             </div>
         </div>        

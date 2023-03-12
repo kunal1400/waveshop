@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { Inter } from 'next/font/google';
 import ProductGrid from '../components/Products';
 import { PageHeading } from '../components/Typography';
-import Textarea from '../components/CanvasInputs/textarea';
+import Textarea from '../components/InputComponents/textarea';
 import { ProductPropsInterface } from '../interfaces';
 
 const inter = Inter({ subsets: ['latin'] });

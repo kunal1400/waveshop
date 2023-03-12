@@ -1,5 +1,5 @@
 import { svgIconType } from "../../interfaces";
-import UrlInput from "../InputComponents/UrlInput";
+import Input from "../InputComponents/Input";
 
 interface IDesignSidebarSwitching {
     iconName: svgIconType,
@@ -24,7 +24,7 @@ const DesignSidebarSwitching: React.FC<IDesignSidebarSwitching> = ({iconName}: I
  * All inputs for Audio input
  */
 const AudioInputs: React.FC = () => {
-    return <UrlInput label="Spotify URL" type={"text"} name={"spotify_url"} placeholder={"Enter spofity url"}  />
+    return <Input label="Spotify URL" type={"text"} name={"spotify_url"} placeholder={"Enter spofity url"}  />
 }
 
 export default DesignSidebarSwitching;

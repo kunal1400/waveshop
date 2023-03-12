@@ -1,8 +1,9 @@
-import p5Types from "p5";
 import { useContext, useId } from "react";
-import AudioUtils from "../Model/Audio";
-import { CanvasContext } from "../../../../context/canvasContext";
 import dynamic from "next/dynamic";
+import { CanvasContext } from "../../../../context/canvasContext";
+import Waveform from "../Model/Waveform";
+import WaveFormSound from "../Model/Sound";
+import p5Types from "p5";
 
 // Will only import `react-p5` on client-side
 const Sketch = dynamic(() => import("react-p5").then((mod) => {
@@ -11,9 +12,7 @@ const Sketch = dynamic(() => import("react-p5").then((mod) => {
         // returning react-p5 default export
         return mod.default
     }), 
-    {
-        ssr: false
-    }
+    { ssr: false }
 );
 
 interface IAudioCanvas {
@@ -22,15 +21,22 @@ interface IAudioCanvas {
 
 const AudioCanvas: React.FC<IAudioCanvas> = ({className}: IAudioCanvas) => {
     const {state} = useContext(CanvasContext);
-    const {gridDefaultCanvasWidth, gridDefaultCanvasHeight, backgroundColor} = state;
+    const {gridDefaultCanvasWidth, gridDefaultCanvasHeight, backgroundColor, audio_url} = state;
     const dynamicId = 'canvas' + useId();
-    let audioUtils: AudioUtils;
+    let waveForm: Waveform;
 
-    const setup = (p: p5Types, dynamicId: Element) => {
-        p.createCanvas(gridDefaultCanvasWidth, gridDefaultCanvasHeight).parent(dynamicId);
+    const setup = (p:p5Types, dynamicId: Element) => {
+        let cnv = p.createCanvas(gridDefaultCanvasWidth, gridDefaultCanvasHeight).parent(dynamicId);
         p.pixelDensity(1);
         p.background(backgroundColor);
         p.noLoop();
+
+        p.loadSound(audio_url, (ls) => {
+            const wfs = new WaveFormSound(p, ls, state)
+            waveForm = new Waveform(p, wfs.getPeaksArrayFromAmplitude(), state);
+            waveForm.drawWaveform();
+            console.log(ls, "sound loaded")
+        })
     }
 
     return <div role="generic" id={dynamicId} className={`${className} bg-gray-200`}>
